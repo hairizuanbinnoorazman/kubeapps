@@ -7,10 +7,23 @@ Contains sample Go Web application
 
 # How to run
 
-**Build the application**
-
 Ensure that there is a local registry running. The following codebase
 
+To do an initial application startup
+
 ```bash
-make build
+make version=v1 build
+make init
+```
+
+To update the application
+
+```bash
+make version=v2 update
+```
+
+To cleanup the applicaton
+
+```bash
+make cleanup
 ```
