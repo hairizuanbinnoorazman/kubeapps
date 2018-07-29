@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+spec:
+  capacity:
+    storage: 1Gi
+  # volumeMode field requires BlockVolume Alpha feature gate to be enabled.
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /Users/hairizuannoorazman/Documents/Projects/kubeapps/multiWebDbApp/mysqldata
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        # This referes to label names. If one checks via the command:
+        # kubectl describe node docker-for-desktop
+        # Can view this kubernetes.io/hostname=docker-for-desktop in the labels
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - docker-for-desktop
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+spec:
+  storageClassName: local-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-2
+spec:
+  capacity:
+    storage: 1Gi
+  # volumeMode field requires BlockVolume Alpha feature gate to be enabled.
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /Users/hairizuannoorazman/Documents/Projects/kubeapps/multiWebDbApp/mysqldata2
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        # This referes to label names. If one checks via the command:
+        # kubectl describe node docker-for-desktop
+        # Can view this kubernetes.io/hostname=docker-for-desktop in the labels
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - docker-for-desktop
