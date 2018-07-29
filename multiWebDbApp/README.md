@@ -27,6 +27,16 @@ Locally, it has to be manually done for now, no dynamic provisioning of storage 
 ```bash
 kubectl apply -f pv.yaml
 kubectl apply -f mysql.yaml
+kubectl expose --port 3306 --type NodePort deployments mysql
+```
+
+To clean up
+
+```bash
+kubectl delete deployments mysql
+kubectl delete pvc mysql-pv-claim
+kubectl delete pv mysql-pv
+kubectl delete pv mysql-pv-2
 ```
 
 Note during mounting, each application is required to have the data to be loaded on the appropriate folder. Do check each application to view where the folder has to be loaded up
