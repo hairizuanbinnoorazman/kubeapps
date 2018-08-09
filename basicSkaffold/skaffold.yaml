@@ -1,0 +1,22 @@
+apiVersion: skaffold/v1alpha2
+kind: Config
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - imageName: gcr.io/projectid/hello-world
+  local:
+    skipPush: true
+    useDockerCLI: false
+deploy:
+  kubectl:
+    manifests:
+      - "./deploy/*"
+profiles:
+  - name: prod
+    build:
+      tagPolicy:
+        gitCommit: {}
+      local:
+        skipPush: false
+        useDockerCLI: true
