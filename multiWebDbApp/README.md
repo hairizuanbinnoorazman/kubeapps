@@ -40,3 +40,5 @@ kubectl delete pv mysql-pv-2
 ```
 
 Note during mounting, each application is required to have the data to be loaded on the appropriate folder. Do check each application to view where the folder has to be loaded up
+
+https://estl.tech/deploying-redis-with-persistence-on-google-kubernetes-engine-c1d60f70a043
